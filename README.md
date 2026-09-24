@@ -2,7 +2,7 @@
 
 Zen 浏览器的独立 CSS 补丁，通过 Sine 与原版 SuperPins 一起加载。修复顶层图标网格固定标签的声音按钮溢出，以及嵌套 Glance 图标被百分比居中规则推偏的问题。
 
-**当前为 0.1.0 本地候选版本，尚未发布仓库或在日常用户配置中安装。** 已完成独立 CSS 测试，以及完整 Sine 的隔离本地注册、加载、开关和重启验证；Sine 仓库下载安装、真实侧栏切换及人工视觉验收仍待完成。
+**当前为 0.1.0 候选版本，尚未在日常用户配置中安装。** 仓库：[HanCanon/superpins-fix](https://github.com/HanCanon/superpins-fix)。 已完成独立 CSS 测试，以及完整 Sine 的隔离本地注册、加载、开关和重启验证；Sine 仓库下载安装、真实侧栏切换及人工视觉验收仍待完成。
 
 ## 适用范围
 
@@ -35,14 +35,14 @@ Zen 浏览器的独立 CSS 补丁，通过 Sine 与原版 SuperPins 一起加载
 
 ## 通过 Sine 安装
 
-仓库尚未发布，因此目前没有可直接填写的安装地址。发布并完成隔离验收后：
+仓库地址为 `https://github.com/HanCanon/superpins-fix`。建议先在隔离配置中验证仓库安装：
 
 1. 将 `chrome.css`、`theme.json`、`README.md` 放在同一个 GitHub 仓库根目录；`.gitignore` 排除本地研究与测试配置。
 2. 在目标设备安装 Sine 和原版 SuperPins，核对上表的必需偏好。
-3. 在 Sine 的自定义仓库安装入口输入实际的 `所有者/仓库名`（或仓库地址），安装 **SuperPins Fix**。不要把示例文字当成地址。
+3. 在 Sine 的自定义仓库安装入口输入 `HanCanon/superpins-fix`（或上述仓库地址），安装 **SuperPins Fix**。若该配置已手动注册同 UUID 的补丁，先在 Sine 中移除旧的本地安装记录。
 4. 确认两个 Mod 均已启用，再按下方清单验收。若热加载结果不明确，重启隔离浏览器后复测。
 
-`theme.json` 使用稳定 UUID、名称、说明、版本、`style.chrome` 和时间字段。没有编造作者或尚不存在的 homepage；本机 Sine 的 `createThemeJSON()` 会用实际安装来源补齐 homepage。UUID 应长期保持不变。
+`theme.json` 使用稳定 UUID、名称、说明、版本、`style.chrome` 和时间字段。homepage 指向本仓库。UUID 应长期保持不变。
 
 Sine 可从未上架的 GitHub 仓库安装 Mod，并从来源获取更新，见 [Sine README](https://github.com/CosmoCreeper/Sine#-test-mods-in-a-snap)。本项目尚未验证远程下载和更新的完整流程；本地注册后的热切换已验证。
 
@@ -56,7 +56,7 @@ Sine 可从未上架的 GitHub 仓库安装 Mod，并从来源获取更新，见
 2. 在测试浏览器关闭时，将本项目三个文件复制到该配置的 `chrome/sine-mods/267b7866-35ad-437f-9ab8-c6baf2810d42/`。
 3. 在该配置的 `chrome/sine-mods/mods.json` 对象中，以补丁 UUID 为键，加入 `theme.json` 的元信息，并增加 `"enabled": true`、`"no-updates": true`。保留其他 Mod 记录，不覆盖整个清单。
 4. 启动测试浏览器。Sine 自己生成 CSS 入口并加载补丁，无需手写或修改 `chrome/sine-mods/chrome.css`。
-5. 本地文件修改不会从 GitHub 自动同步；测试新的 CSS 时重新复制文件并重启测试浏览器。本地记录没有 homepage，保持禁止自动更新。
+5. 本地文件修改不会从 GitHub 自动同步；测试新的 CSS 时重新复制文件并重启测试浏览器。本次本地测试记录创建时没有 homepage；即使新 manifest 已提供仓库地址，本地测试记录也应保持禁止自动更新，避免测试代码被远端替换。
 
 本次隔离配置位于项目内 `.local-research/profile-sine/`。本地注册方式已验证，不代表 Sine 承诺长期支持此内部记录格式。日常分发仍推荐 GitHub 仓库安装，便于获取更新。不要在浏览器运行时直接修改其安装清单。
 

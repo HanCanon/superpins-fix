@@ -1,11 +1,12 @@
 {
   "id": "267b7866-35ad-437f-9ab8-c6baf2810d42",
   "name": "SuperPins Fix",
+  "homepage": "https://github.com/HanCanon/superpins-fix",
   "description": "Scoped audio and Glance layout fixes for SuperPins legacy pinned-tab grids.",
   "version": "0.1.0",
   "style": { "chrome": "chrome.css" },
   "fork": ["zen"],
   "tags": ["tabs"],
   "createdAt": "2026-09-23T00:00:00Z",
-  "updatedAt": "2026-09-23T00:00:00Z"
+  "updatedAt": "2026-09-24T00:00:00Z"
 }
