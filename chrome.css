@@ -1,0 +1,83 @@
+/* SuperPins Fix 0.1.0 — Zen 1.22.2b / SuperPins 1.7.2.
+ * Only top-level pins in the expanded, auto-growing legacy grid.
+ * Keep native controls/events. Non-growing grids are out of scope.
+ * The two real IDs beat SuperPins' important declarations in either load order.
+ */
+@media (-moz-pref("zen.tabs.vertical")) and (-moz-pref("uc.pins.legacy-layout")) and (-moz-pref("uc.pins.auto-grow")) {
+  #navigator-toolbox[zen-sidebar-expanded="true"] #tabbrowser-tabs
+    .zen-workspace-pinned-tabs-section:not(:has([zen-dragtarget]))
+    > .tabbrowser-tab[pinned]:not([zen-essential], [zen-glance-tab]) {
+    /* Three non-overlapping slots: Glance 24 + favicon 20 + audio 24,
+     * two 2px gaps and two 4px insets. No clipping or hidden audio controls. */
+    min-width: max(80px, var(--tab-pinned-min-width-expanded, 0px)) !important;
+
+    > .tab-stack > .tab-content {
+      display: grid !important;
+      grid-template-columns: 24px minmax(20px, 1fr) 24px !important;
+      align-items: center !important;
+      justify-items: center !important;
+      column-gap: 2px !important;
+      padding-inline: 4px !important;
+      min-width: 0 !important;
+
+      > .tab-icon-stack {
+        grid-column: 2 !important;
+        grid-row: 1 !important;
+        position: relative !important;
+        inset: auto !important;
+        margin: 0 !important;
+        transform: none !important;
+
+        > :is(.tab-icon-image, .tab-icon-pending, .tab-throbber) {
+          margin-inline: 0 !important;
+        }
+      }
+
+      > .tab-audio-button {
+        grid-column: 3 !important;
+        grid-row: 1 !important;
+        position: relative !important;
+        inset: auto !important;
+        margin: 0 !important;
+        width: 24px !important;
+        height: 24px !important;
+        min-width: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+        /* Native display, state icons, tooltip and click handlers stay intact. */
+      }
+
+      > .tabbrowser-tab[zen-glance-tab] {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+        position: relative !important;
+        inset: auto !important;
+        margin: 0 !important;
+        width: 24px !important;
+        min-width: 0 !important;
+        max-width: 24px !important;
+        height: 24px !important;
+        min-height: 0 !important;
+        --tab-min-height: 24px;
+
+        > .tab-stack > .tab-content {
+          display: flex !important;
+          justify-content: center !important;
+          padding: 0 !important;
+
+          > .tab-icon-stack {
+            position: relative !important;
+            inset: auto !important;
+            margin: 0 !important;
+            transform: none !important;
+
+            > .tab-icon-image {
+              width: 14px !important;
+              height: 14px !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}
