@@ -1,4 +1,4 @@
-/* SuperPins Fix 0.1.1 — Zen 1.22.2b / SuperPins 1.7.2.
+/* SuperPins Fix 0.1.2 — Zen 1.22.2b / SuperPins 1.7.2.
  * Preserve upstream tab sizing and wrapping. Badges never occupy flex space.
  * Two ancestor IDs override SuperPins regardless of stylesheet load order.
  */
@@ -8,7 +8,20 @@
     > .tabbrowser-tab[pinned]:not([zen-essential], [zen-glance-tab]) {
     > .tab-stack > .tab-content {
       position: relative !important;
-      /* Keep the original content layout in the ordinary state. */
+      display: grid !important;
+      place-items: center !important;
+      padding-inline: 0 !important;
+      min-width: 0 !important;
+      > .tab-icon-stack {
+        grid-area: 1 / 1 !important;
+        position: relative !important;
+        inset: auto !important;
+        margin: 0 !important;
+        transform: none !important;
+        > :is(.tab-icon-image, .tab-icon-pending, .tab-throbber) {
+          margin-inline: 0 !important;
+        }
+      }
       > .tab-audio-button {
         position: absolute !important;
         inset: auto 0 0 auto !important;
@@ -26,15 +39,22 @@
       }
       > .tabbrowser-tab[zen-glance-tab] {
         position: absolute !important;
-        inset: auto auto 0 0 !important;
+        inset: 0 0 auto auto !important;
         margin: 0 !important;
-        width: 16px !important;
+        width: 24px !important;
         min-width: 0 !important;
-        max-width: 16px !important;
-        height: 16px !important;
+        max-width: 24px !important;
+        height: 20px !important;
         min-height: 0 !important;
-        --tab-min-height: 16px;
+        --tab-min-height: 20px;
         z-index: 2 !important;
+        /* Essentials-style floating card, sized for the narrower pinned grid. */
+        > .tab-stack > .tab-background {
+          background: light-dark(rgb(249, 249, 249), rgb(63, 63, 63)) !important;
+          border: 2px solid light-dark(rgba(0, 0, 0, 0.4), rgba(255, 255, 255, 0.4)) !important;
+          border-radius: 4px !important;
+          margin: 0 !important;
+        }
         > .tab-stack > .tab-content {
           display: flex !important;
           justify-content: center !important;
@@ -45,18 +65,13 @@
             margin: 0 !important;
             transform: none !important;
             > .tab-icon-image {
-              width: 12px !important;
-              height: 12px !important;
+              width: 14px !important;
+              height: 14px !important;
               margin: 0 !important;
             }
           }
         }
       }
-    }
-    /* Only active states need room above the two bottom-corner badges. */
-    &:is([soundplaying], [muted], [activemedia-blocked], :has([zen-glance-tab]))
-      > .tab-stack > .tab-content > .tab-icon-stack {
-      transform: translate(-50%, -8px) !important;
     }
   }
 }
